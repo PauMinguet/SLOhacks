@@ -26,7 +26,6 @@ def process(user_name):
 
 
 def sign_in(user_name, password):
-    print()
     while True:
         # user_name = input("New Username: ")
         if sortNames.find(user_name):
@@ -55,7 +54,6 @@ def log_in(user_name, password):
 
     with open(user_name + ".txt", "r") as f:
         lines = f.readlines()
-        print(lines)
         savedPassword = lines[1].strip()
 
     while True:

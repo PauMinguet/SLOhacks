@@ -1,46 +1,46 @@
 import pygame
 import sys
-<<<<<<< HEAD
-=======
-import main
->>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
 import processes
 import user
 
 # Initialize Pygame
 pygame.init()
-
 # Define Colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GRAY = (128, 128, 128)
-
 # Set the dimensions of the screen
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 600
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-
-# Set the title of the screen
-pygame.display.set_caption("Login/Signup")
-
-# Set the font
+pygame.display.set_caption("Hackathon app")
 font = pygame.font.Font(None, 32)
 
-# Set the text boxes
-username_box = pygame.Rect(250, 125, 300, 50)
-password_box = pygame.Rect(250, 250, 300, 50)
+stage = "intro"
 
-# Set the buttons
-login_button = pygame.Rect(200, 375, 125, 50)
-signup_button = pygame.Rect(475, 375, 125, 50)
 
-# Set the button text
-login_text = font.render("Login", True, BLACK)
-signup_text = font.render("Sign Up", True, BLACK)
+# Set the font
 
-# Set the default text
-username = ""
-password = ""
+
+if stage == "intro":
+    # Set the text boxes
+    username_box = pygame.Rect(250, 125, 300, 50)
+    password_box = pygame.Rect(250, 250, 300, 50)
+    # Set the buttons
+    login_button = pygame.Rect(200, 375, 125, 50)
+    signup_button = pygame.Rect(475, 375, 125, 50)
+    # Set the button text
+    login_text = font.render("Login", True, BLACK)
+    signup_text = font.render("Sign Up", True, BLACK)
+    # Set the default text
+    username = ""
+    password = ""
+
+elif stage == "processes":
+    font = pygame.font.Font(None, 24)
+
+
+
 
 # Main loop
 while True:
@@ -53,30 +53,14 @@ while True:
             # Handle button clicks
             if login_button.collidepoint(pygame.mouse.get_pos()):
 
-<<<<<<< HEAD
                 processes.log_in(username, password)
-
-                print("Login button clicked")
-
+                stage = "processes"
 
             elif signup_button.collidepoint(pygame.mouse.get_pos()):
-
                 processes.sign_in(username, password)
+                stage = "processes"
 
-                print("Sign up button clicked")
 
-=======
-
-                print("Login button clicked")
-
-                
-            elif signup_button.collidepoint(pygame.mouse.get_pos()):
-
-                processes.sign_in(username, password)
-
-                print("Sign up button clicked")
-
->>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
         # Handle key events
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
@@ -85,43 +69,50 @@ while True:
                 password = ""
             else:
                 # Add characters to the text boxes
-                if username_box.collidepoint(pygame.mouse.get_pos()):
-                    if event.key == pygame.K_BACKSPACE:
-                        username = username[:-1]
-                    else:
-                        username += event.unicode
-                elif password_box.collidepoint(pygame.mouse.get_pos()):
-                    if event.key == pygame.K_BACKSPACE:
-                        password = password[:-1]
-                    else:
-                        password += event.unicode
+                if stage == "intro":
+                    if username_box.collidepoint(pygame.mouse.get_pos()):
+                        if event.key == pygame.K_BACKSPACE:
+                            username = username[:-1]
+                        else:
+                            username += event.unicode
+                    elif password_box.collidepoint(pygame.mouse.get_pos()):
+                        if event.key == pygame.K_BACKSPACE:
+                            password = password[:-1]
+                        else:
+                            password += event.unicode
 
     # Fill the background
     screen.fill(WHITE)
 
-    # Draw the text boxes
-    pygame.draw.rect(screen, GRAY, username_box, 2)
-    pygame.draw.rect(screen, GRAY, password_box, 2)
+    
+    
+    if stage == "intro":
+        # Draw the text boxes
+        pygame.draw.rect(screen, GRAY, username_box, 2)
+        pygame.draw.rect(screen, GRAY, password_box, 2)
 
-    # Draw the text in the text boxes
-    username_text = font.render(username, True, BLACK)
-    screen.blit(username_text, (username_box.x + 5, username_box.y + 5))
-    password_text = font.render("*" * len(password), True, BLACK)
-    screen.blit(password_text, (password_box.x + 5, password_box.y + 5))
+        # Draw the text in the text boxes
+        username_text = font.render(username, True, BLACK)
+        screen.blit(username_text, (username_box.x + 5, username_box.y + 5))
+        password_text = font.render("*" * len(password), True, BLACK)
+        screen.blit(password_text, (password_box.x + 5, password_box.y + 5))
 
-    # Draw the buttons
-<<<<<<< HEAD
-    if username != "" and password != "":
+        # Draw the buttons
+        if username != "" and password != "":
+            pygame.draw.rect(screen, GRAY, login_button, 2)
+            pygame.draw.rect(screen, GRAY, signup_button, 2)
+
+        # Draw the button text
+        screen.blit(login_text, (login_button.x + 25, login_button.y + 15))
+        screen.blit(signup_text, (signup_button.x + 10, signup_button.y + 15))
+
         pygame.draw.rect(screen, GRAY, login_button, 2)
         pygame.draw.rect(screen, GRAY, signup_button, 2)
-=======
-    pygame.draw.rect(screen, GRAY, login_button, 2)
-    pygame.draw.rect(screen, GRAY, signup_button, 2)
->>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
+    
+    elif stage == "processes":
+        pass
 
-    # Draw the button text
-    screen.blit(login_text, (login_button.x + 25, login_button.y + 15))
-    screen.blit(signup_text, (signup_button.x + 10, signup_button.y + 15))
+    
 
     # Update the screen
     pygame.display.update()
