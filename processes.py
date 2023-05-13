@@ -41,3 +41,37 @@ def log_in():
             print("Incorrect password.\nPlease try again")
         else:
             break
+    return user_name
+
+
+
+def addfriend(user_name):
+            
+    while True:
+        attempt = input("Search: ")
+        if not sortNames.find(attempt):
+            print("This user does not exist.\nPlease try again")
+            break
+        else:
+            break
+            
+    print("You have added " + attempt + ".")
+
+    with open(user_name + ".txt", "w") as f:
+        f.write(attempt + " 0\n")
+
+    with open(attempt + ".txt", "w") as f:
+        f.write(user_name + " 0\n")
+
+
+def get_user_data(user_name):
+    with open(user_name + ".txt", "r") as f:
+            lines = f.readlines()
+            print()
+            print("Welcome, " + lines[0].strip())
+    return lines
+    
+def listfriends(user_data):
+    friends = lines[2:]
+    for friend in friends:
+        print(friend.strip().split()[0] + " " + friend.strip().split()[1])

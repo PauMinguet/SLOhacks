@@ -12,27 +12,21 @@ print("=====  OWING MONEY APP  =====")
 print()
 var = input("Log in or sign up (l or s)? ")
 
+
+
+
 if var == "s":
+
     processes.sign_in()
 
 
 
 elif var == "l":
-    processes.log_in()
 
-    user.main()
-
-
-    with open(user_name + ".txt", "r") as f:
-            lines = f.readlines()
-            print()
-            print("Welcome, " + lines[0].strip())
-            friends = lines[2:]
-
-            for friend in friends:
-                print(friend.strip().split()[0])
+    user_name = processes.log_in()
 
 
+    user_data = processes.get_user_data(user_name)
     
 
     while var != 'e':
@@ -42,25 +36,20 @@ elif var == "l":
         What do you want to do?
             - Add friends (a)
             - List your debts (l)
-            - Pay a debt (p)
+            - Pay (p)
+            - New debt (n)
             - Exit (e)
         """
         )
 
         if var == "a":
-            
-            while True:
-                attempt = input("Search: ")
-                if not sortNames.find(attempt):
-                    print("This user does not exist.\nPlease try again")
-                    break
-                else:
-                    break
-            
-        print("You have added " + attempt + ".")
+            processes.addfriend(user_name)
 
-        with open(user_name + ".txt", "w") as f:
-            f.write(attempt + " 0\n")
-
-        with open(attempt + ".txt", "w") as f:
-            f.write(user_name + " 0\n")
+        elif var == "l":
+            processes.listfriends(user_data)
+        
+        elif var == "p":
+            processes.pay(user_name, user_data) ?????????
+        
+        elif var == "n":
+            processes.new_charge(user_name, user_data)??????????
