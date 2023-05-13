@@ -1,4 +1,4 @@
-
+import sortNames
 
 def sign_in():
     print()
@@ -21,17 +21,20 @@ def sign_in():
 
 
 def log_in():
-    user_name = input("Username: ")
-    while True:
-        try:
-            with open(user_name + ".txt", "r") as f:
-                lines = f.readlines(2)
-                password = lines[1].strip()
-            break
-        except:
-            print("Incorrect username.\nPlease try again")
-
     
+    while True:
+        user_name = input("Username: ")
+        if not sortNames.find(user_name):
+            print("Incorrect username.\nPlease try again")
+        else:
+            break
+        
+    with open(user_name + ".txt", "r") as f:
+        lines = f.readlines()
+        print(lines)
+        password = lines[1].strip()
+          
+
     while True:
         attempt = input("Password: ")
         if attempt != password:

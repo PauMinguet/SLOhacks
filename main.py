@@ -1,23 +1,27 @@
 import sortNames
 import processes
 
-with open("users.txt","r"):
-    pass
+try:
+    with open("users.txt","r"):
+        pass
+except:
+    with open("users.txt","x"):
+        pass
+
 print("=====  OWING MONEY APP  =====")
 print()
 var = input("Log in or sign up (l or s)? ")
 
 if var == "s":
-    sign_in()
+    processes.sign_in()
 
 
 
 elif var == "l":
+    processes.log_in()
 
-    log_in()
+    user.main()
 
-    UserAccount.main()
-    
 
     with open(user_name + ".txt", "r") as f:
             lines = f.readlines()
@@ -29,7 +33,11 @@ elif var == "l":
                 print(friend.strip().split()[0])
 
 
-    var = input(
+    
+
+    while var != 'e':
+
+        var = input(
         """
         What do you want to do?
             - Add friends (a)
@@ -37,9 +45,8 @@ elif var == "l":
             - Pay a debt (p)
             - Exit (e)
         """
-    )
+        )
 
-    while var != 'e':
         if var == "a":
             
             while True:
