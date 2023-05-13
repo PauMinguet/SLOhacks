@@ -23,7 +23,11 @@ def process(user_name):
         elif var == "p":
             receiver = input("Who would you like to pay?")
             amount = input("How much would you like to pay?")
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
 
 def sign_in(user_name, password):
     print()

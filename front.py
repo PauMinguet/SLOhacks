@@ -1,5 +1,9 @@
 import pygame
 import sys
+<<<<<<< HEAD
+=======
+import main
+>>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
 import processes
 import user
 
@@ -49,6 +53,7 @@ while True:
             # Handle button clicks
             if login_button.collidepoint(pygame.mouse.get_pos()):
 
+<<<<<<< HEAD
                 processes.log_in(username, password)
 
                 print("Login button clicked")
@@ -60,6 +65,18 @@ while True:
 
                 print("Sign up button clicked")
 
+=======
+
+                print("Login button clicked")
+
+                
+            elif signup_button.collidepoint(pygame.mouse.get_pos()):
+
+                processes.sign_in(username, password)
+
+                print("Sign up button clicked")
+
+>>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
         # Handle key events
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
@@ -93,9 +110,14 @@ while True:
     screen.blit(password_text, (password_box.x + 5, password_box.y + 5))
 
     # Draw the buttons
+<<<<<<< HEAD
     if username != "" and password != "":
         pygame.draw.rect(screen, GRAY, login_button, 2)
         pygame.draw.rect(screen, GRAY, signup_button, 2)
+=======
+    pygame.draw.rect(screen, GRAY, login_button, 2)
+    pygame.draw.rect(screen, GRAY, signup_button, 2)
+>>>>>>> e7d10687efbc53dd507cd059685c5816966dc3c4
 
     # Draw the button text
     screen.blit(login_text, (login_button.x + 25, login_button.y + 15))
