@@ -1,74 +1,104 @@
 import pygame
+import sys
+import main
+import processes
+import user
 
-# initialize Pygame
+# Initialize Pygame
 pygame.init()
 
-# set up the window
-window_size = (800, 600)
-screen = pygame.display.set_mode(window_size)
-pygame.display.set_caption("Login Screen")
+# Define Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+GRAY = (128, 128, 128)
 
-# set up fonts
-font = pygame.font.SysFont("Arial", 24)
-button_font = pygame.font.SysFont("Arial", 18)
+# Set the dimensions of the screen
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-# set up colors
-background_color = (255, 255, 255)
-sign_in_button_color = (0, 200, 0)
-log_in_button_color = (200, 0, 0)
-text_color = (255, 255, 255)
+# Set the title of the screen
+pygame.display.set_caption("Login/Signup")
 
-# set up button sizes and positions
-button_width = 300
-button_height = 150
-button_spacing = 40
-button_top_margin = 120
-sign_in_button_left = (window_size[0] - button_width - button_spacing) // 2
-log_in_button_left = sign_in_button_left + button_width + button_spacing
+# Set the font
+font = pygame.font.Font(None, 32)
 
-# main loop
+# Set the text boxes
+username_box = pygame.Rect(250, 125, 300, 50)
+password_box = pygame.Rect(250, 250, 300, 50)
+
+# Set the buttons
+login_button = pygame.Rect(200, 375, 125, 50)
+signup_button = pygame.Rect(475, 375, 125, 50)
+
+# Set the button text
+login_text = font.render("Login", True, BLACK)
+signup_text = font.render("Sign Up", True, BLACK)
+
+# Set the default text
+username = ""
+password = ""
+
+# Main loop
 while True:
-    # event handling
+    # Event handling
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
-            quit()
+            sys.exit()
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            # Handle button clicks
+            if login_button.collidepoint(pygame.mouse.get_pos()):
 
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_pos = pygame.mouse.get_pos()
-            if sign_in_button_rect.collidepoint(mouse_pos):
-                print("Sign in button pressed")
-            elif log_in_button_rect.collidepoint(mouse_pos):
-                print("Log in button pressed")
 
-    # fill the background
-    screen.fill(background_color)
+                print("Login button clicked")
 
-    # render the buttons
-    sign_in_button = button_font.render("Sign In", True, text_color)
-    sign_in_button_rect = sign_in_button.get_rect()
-    sign_in_button_rect.left = sign_in_button_left
-    sign_in_button_rect.top = button_top_margin
-    pygame.draw.rect(screen, sign_in_button_color, sign_in_button_rect)
-    pygame.draw.rect(screen, text_color, sign_in_button_rect, 2)
-    sign_in_button_rect.inflate_ip(-10, -10)
-    screen.blit(sign_in_button, sign_in_button_rect)
+                
+            elif signup_button.collidepoint(pygame.mouse.get_pos()):
 
-    log_in_button = button_font.render("Log In", True, text_color)
-    log_in_button_rect = log_in_button.get_rect()
-    log_in_button_rect.left = log_in_button_left
-    log_in_button_rect.top = button_top_margin
-    pygame.draw.rect(screen, log_in_button_color, log_in_button_rect)
-    pygame.draw.rect(screen, text_color, log_in_button_rect, 2)
-    log_in_button_rect.inflate_ip(-10, -10)
-    screen.blit(log_in_button, log_in_button_rect)
+                processes.sign_in(username, password)
 
-    # check if the mouse is over a button
-    mouse_pos = pygame.mouse.get_pos()
-    if sign_in_button_rect.collidepoint(mouse_pos):
-        pygame.draw.rect(screen, (100, 255, 100), sign_in_button_rect, 3)
-    elif log_in_button_rect.collidepoint(mouse_pos):
-        pygame.draw.rect(screen, (255, 100, 100), log_in_button_rect, 3)
+                print("Sign up button clicked")
 
-    # update the display
+        # Handle key events
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_RETURN:
+                # Clear the text boxes on Enter
+                username = ""
+                password = ""
+            else:
+                # Add characters to the text boxes
+                if username_box.collidepoint(pygame.mouse.get_pos()):
+                    if event.key == pygame.K_BACKSPACE:
+                        username = username[:-1]
+                    else:
+                        username += event.unicode
+                elif password_box.collidepoint(pygame.mouse.get_pos()):
+                    if event.key == pygame.K_BACKSPACE:
+                        password = password[:-1]
+                    else:
+                        password += event.unicode
+
+    # Fill the background
+    screen.fill(WHITE)
+
+    # Draw the text boxes
+    pygame.draw.rect(screen, GRAY, username_box, 2)
+    pygame.draw.rect(screen, GRAY, password_box, 2)
+
+    # Draw the text in the text boxes
+    username_text = font.render(username, True, BLACK)
+    screen.blit(username_text, (username_box.x + 5, username_box.y + 5))
+    password_text = font.render("*" * len(password), True, BLACK)
+    screen.blit(password_text, (password_box.x + 5, password_box.y + 5))
+
+    # Draw the buttons
+    pygame.draw.rect(screen, GRAY, login_button, 2)
+    pygame.draw.rect(screen, GRAY, signup_button, 2)
+
+    # Draw the button text
+    screen.blit(login_text, (login_button.x + 25, login_button.y + 15))
+    screen.blit(signup_text, (signup_button.x + 10, signup_button.y + 15))
+
+    # Update the screen
     pygame.display.update()
