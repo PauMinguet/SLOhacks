@@ -1,2 +1,0 @@
-# SLOhacks
-Rish-Aayush-Pau
