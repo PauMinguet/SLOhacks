@@ -36,11 +36,6 @@ if stage == "intro":
     username = ""
     password = ""
 
-elif stage == "processes":
-    font = pygame.font.Font(None, 24)
-
-
-
 
 # Main loop
 while True:
@@ -108,10 +103,6 @@ while True:
 
         pygame.draw.rect(screen, GRAY, login_button, 2)
         pygame.draw.rect(screen, GRAY, signup_button, 2)
-    
-    elif stage == "processes":
-        pass
-
     
 
     # Update the screen
