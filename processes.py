@@ -6,10 +6,10 @@ def process(user_name):
         var = input(
             """
         What do you want to do?
-            - Add friends (a)
-            - List your debts (l)
-            - Pay (p)
-            - New debt (n)
+            - Want to add friends? Press 'a'
+            - Want to see who you owe money? Press 'l'
+            - Want to pay the debt? Press 'p'
+            - Want to change the amount owed? Press 'n'   NOTE : ADD THIRD AMOUNT TO KEEP TRACK OF MONEY OWED BY OTHERS
             - Exit (e)
         """
         )
@@ -23,19 +23,30 @@ def process(user_name):
         elif var == "p":
             receiver = input("Who would you like to pay?")
             amount = input("How much would you like to pay?")
+            payFriend(user_name, receiver, amount)
+        elif var == "n":
+            receiver = input("Who's debt are you trying to update?")
+            amount = input("What would you like to change it to?")
+            newDebt(user_name, receiver, amount)
 
 
-def sign_in(user_name, password):
+def sign_in():
+    try:
+        with open("users.txt", "r"):
+            pass
+    except:
+        with open("users.txt", "x"):
+            pass
+    print()
     while True:
-        # user_name = input("New Username: ")
+        user_name = input("Please enter your username : ")
         if sortNames.find(user_name):
-            print("Username already in use\nPlease try again")
+            print("This username is already in use\nPlease try again")
         else:
             break
+    password = input("Enter Password : ")
 
     sortNames.insert(user_name)
-
-    # password = input("New Password: ")
 
     userFile = user_name + ".txt"
     with open(userFile, "w") as f:
@@ -45,8 +56,13 @@ def sign_in(user_name, password):
 
 
 def log_in(user_name, password):
+    try:
+        with open("users.txt", "r"):
+            pass
+    except:
+        with open("users.txt", "x"):
+            pass
     while True:
-        # user_name = input("Username: ")
         if not sortNames.find(user_name):
             print("Incorrect username.\nPlease try again")
         else:
@@ -54,15 +70,15 @@ def log_in(user_name, password):
 
     with open(user_name + ".txt", "r") as f:
         lines = f.readlines()
+        print(lines)
         savedPassword = lines[1].strip()
 
     while True:
-        # attempt = input("Password: ")
         if password != savedPassword:
             print("Incorrect password.\nPlease try again")
         else:
             break
-    #return user_name
+
     process(user_name)
 
 
@@ -77,10 +93,10 @@ def addfriend(user_name):
 
     print("You have added " + attempt + ".")
 
-    with open(user_name + ".txt", "a") as f:
+    with open(user_name + ".txt", "w") as f:
         f.write(attempt + " 0\n")
 
-    with open(attempt + ".txt", "a") as f:
+    with open(attempt + ".txt", "w") as f:
         f.write(user_name + " 0\n")
 
 
@@ -96,3 +112,40 @@ def listfriends(user_data):
     friends = user_data[2:]
     for friend in friends:
         print(friend.strip().split()[0] + " " + friend.strip().split()[1])
+
+
+def payFriend(user_name, friend, amount):
+    with open(user_name + ".txt", "r") as f:
+        friendList = f.readlines()
+
+    with open(user_name + ".txt", "w") as f:
+        f.write(friendList[0])
+        f.write(friendList[1])
+        for buddy in friendList[2:]:
+            buddyName = buddy.split()[0]
+            buddyOwe = buddy.split()[1]
+            buddyOwe = int(buddyOwe)
+            if buddyName == friend:
+                print("yes")
+                if amount <= buddyOwe:
+                    buddyOwe -= amount
+                    print(buddyOwe)
+                buddy = buddyName + " " + str(buddyOwe)
+            f.write(buddy)
+
+
+def newDebt(user_name, friend, amount):
+    with open(user_name + ".txt", "r") as f:
+        friendList = f.readlines()
+
+    with open(user_name + ".txt", "w") as f:
+        f.write(friendList[0])
+        f.write(friendList[1])
+        for buddy in friendList[2:]:
+            buddyName = buddy.split()[0]
+            buddyOwe = buddy.split()[1]
+            buddyOwe = int(buddyOwe)
+            if buddyName == friend:
+                buddyOwe = amount
+                buddy = buddyName + " " + str(buddyOwe)
+            f.write(buddy)
