@@ -51,7 +51,7 @@ def sign_in():
     userFile = user_name + ".txt"
     with open(userFile, "w") as f:
         f.write(user_name + "\n")
-        f.write(password)
+        f.write(password + "\n")
     process(user_name)
 
 
