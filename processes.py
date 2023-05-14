@@ -176,3 +176,14 @@ def newDebt(user_name, target_friend, amount):
         f.write(info[1])
         for i in range(len(friends)):
             f.write(friends[i])
+
+        f.write(friendList[0])
+        f.write(friendList[1])
+        for buddy in friendList[2:]:
+            buddyName = buddy.split()[0]
+            buddyOwe = buddy.split()[1]
+            buddyOwe = int(buddyOwe)
+            if buddyName == friend:
+                buddyOwe += int(amount)
+                buddy = buddyName + " " + str(buddyOwe)
+            f.write(buddy)
