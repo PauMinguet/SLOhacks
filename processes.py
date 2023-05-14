@@ -133,6 +133,9 @@ def listfriends(user_data):
     print()
     print()
 
+    i_owe = []
+    they_owe = []
+
 
 
 
