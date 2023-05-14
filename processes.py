@@ -92,10 +92,10 @@ def addfriend(user_name):
             break
         else:
             with open(user_name + ".txt", "a") as f:
-            f.write(attempt + " 0\n")
+                f.write(attempt + " 0\n")
 
             with open(attempt + ".txt", "a") as f:
-            f.write(user_name + " 0\n")
+                f.write(user_name + " 0\n")
             print("You have added " + attempt + ".")
             break
 
