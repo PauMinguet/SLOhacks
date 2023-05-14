@@ -12,8 +12,7 @@ def process(user_name):
     - Want to pay a debt? Press 'p'
     - Want to change the amount owed? Press 'n'
     - Log out (o)
-    - Exit (e)
-        """
+    - Exit (e)          """
         )
         if var == "e":
             break
@@ -25,12 +24,12 @@ def process(user_name):
             user_data = get_user_data(user_name)
             listfriends(user_data)
         elif var == "p":
-            receiver = input("Who would you like to pay?" )
-            amount = input("How much would you like to pay?" )
+            receiver = input("Who would you like to pay? ")
+            amount = input("How much would you like to pay? ")
             payFriend(user_name, receiver, amount)
         elif var == "n":
-            receiver = input("Who's debt are you trying to update?" )
-            amount = input("How much do they owe you?" )
+            receiver = input("Who's debt are you trying to update? ")
+            amount = input("How much do they owe you? ")
             newDebt(user_name, receiver, amount)
 
 
@@ -134,7 +133,7 @@ def listfriends(user_data):
     print("In peace: ")
     for friend in zero:
         print(friend.strip().split()[0] + ": " + friend.strip().split()[1] + "$")
-    
+
     print()
     print()
 
@@ -171,6 +170,6 @@ def newDebt(user_name, friend, amount):
             buddyOwe = buddy.split()[1]
             buddyOwe = int(buddyOwe)
             if buddyName == friend:
-                buddyOwe += amount
+                buddyOwe += int(amount)
                 buddy = buddyName + " " + str(buddyOwe)
             f.write(buddy)
