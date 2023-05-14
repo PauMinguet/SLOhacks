@@ -1,4 +1,5 @@
 import sortNames
+import main
 
 
 def process(user_name):
@@ -10,11 +11,14 @@ def process(user_name):
             - Want to see who you owe money? Press 'l'
             - Want to pay a debt? Press 'p'
             - Want to change the amount owed? Press 'n'
+            - Log out (o)
             - Exit (e)
         """
         )
         if var == "e":
             break
+        elif var == "o":
+            main.main()
         elif var == "a":
             addfriend(user_name)
         elif var == "l":
