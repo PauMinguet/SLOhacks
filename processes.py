@@ -55,7 +55,7 @@ def sign_in():
     process(user_name)
 
 
-def log_in(user_name, password):
+def log_in():
     try:
         with open("users.txt", "r"):
             pass
