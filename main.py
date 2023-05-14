@@ -19,21 +19,6 @@ elif var == "l":
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     #user_data = processes.get_user_data(user_name)
 
     # while var != 'e':

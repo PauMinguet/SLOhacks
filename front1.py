@@ -36,9 +36,19 @@ if stage == "intro":
     username = ""
     password = ""
 
-elif stage == ""
+elif stage == "processes":
 
-
+    a_button = pygame.Rect(200, 375, 125, 50)
+    l_button = pygame.Rect(475, 375, 125, 50)
+    n_button = pygame.Rect(200, 375, 125, 50)
+    p_button = pygame.Rect(475, 375, 125, 50)
+    e_button = pygame.Rect(475, 375, 125, 50)
+    # Set the button text
+    a = font.render("ADD FRIEND", True, BLACK)
+    l = font.render("LIST FRIENDS", True, BLACK)
+    n = font.render("NEW EXPENSE", True, BLACK)
+    p = font.render("PAY DEBT", True, BLACK)
+    e = font.render("LOG OUT", True, BLACK)
 
 
 # Main loop
@@ -60,6 +70,9 @@ while True:
                     processes.sign_in(username, password)
                     stage = "processes"
             elif stage == "processes":
+                if a_button.collidepoint(pygame.mouse.get_pos()):
+                    processes.log_in(username, password)
+                    stage = "a"
 
 
         # Handle key events

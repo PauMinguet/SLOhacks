@@ -77,10 +77,10 @@ def addfriend(user_name):
 
     print("You have added " + attempt + ".")
 
-    with open(user_name + ".txt", "w") as f:
+    with open(user_name + ".txt", "a") as f:
         f.write(attempt + " 0\n")
 
-    with open(attempt + ".txt", "w") as f:
+    with open(attempt + ".txt", "a") as f:
         f.write(user_name + " 0\n")
 
 
