@@ -91,15 +91,16 @@ def addfriend(user_name):
             print("This user does not exist.\nPlease try again")
             break
         else:
+            with open(user_name + ".txt", "a") as f:
+            f.write(attempt + " 0\n")
+
+            with open(attempt + ".txt", "a") as f:
+            f.write(user_name + " 0\n")
+            print("You have added " + attempt + ".")
             break
 
-    print("You have added " + attempt + ".")
 
-    with open(user_name + ".txt", "w") as f:
-        f.write(attempt + " 0\n")
-
-    with open(attempt + ".txt", "a") as f:
-        f.write(user_name + " 0\n")
+    
 
 
 def get_user_data(user_name):
