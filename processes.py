@@ -7,9 +7,7 @@ def process(user_name):
     while True:
         var = input(
             """
-
     MAIN MENU
-
     - Want to add friends? Press 'a'
     - Want to see who you owe money? Press 'l'
     - Want to pay a debt? Press 'p'
@@ -32,7 +30,10 @@ def process(user_name):
             payFriend(user_name, receiver, amount)
         elif var == "n":
             receiver = input("Who's debt are you trying to update? ")
-            amount = input("How much do they owe you? ")
+            y_n = input("Do you owe them money? (y/n) ")
+            amount = input("How much money? ")
+            if y_n == "y":
+                amount = "-" + amount
             newDebt(user_name, receiver, amount)
 
 
@@ -79,7 +80,6 @@ def log_in():
         lines = f.readlines()
         savedPassword = lines[1].strip()
 
-    
     while True:
         password = input("Password : ")
         if password != savedPassword:
@@ -102,6 +102,7 @@ def addfriend(user_name):
                 f.write(user_name + " 0\n")
             print("You have added " + attempt + ".")
             break
+    print("Friend successfully added!")
 
 
 def get_user_data(user_name):
@@ -125,7 +126,6 @@ def listfriends(user_data):
             zero.append(friend)
 
     print()
-    print()
     print("You owe: ")
     for friend in i_owe:
         print(friend.strip().split()[0] + ": " + friend.strip().split()[1][1:] + "$")
@@ -137,8 +137,6 @@ def listfriends(user_data):
     print("In peace: ")
     for friend in zero:
         print(friend.strip().split()[0] + ": " + friend.strip().split()[1] + "$")
-
-    print()
     print()
 
 
@@ -192,5 +190,4 @@ def newDebt(user_name, friend, amount):
                 buddyOwe -= int(amount)
                 buddy = buddyName + " " + str(buddyOwe) + "\n"
             f.write(buddy)
-
-    
+    print("The amount is changed!")
