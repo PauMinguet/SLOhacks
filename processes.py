@@ -12,8 +12,7 @@ def process(user_name):
     - Want to pay a debt? Press 'p'
     - Want to change the amount owed? Press 'n'
     - Log out (o)
-    - Exit (e)
-        """
+    - Exit (e)          """
         )
         if var == "e":
             break
@@ -25,12 +24,12 @@ def process(user_name):
             user_data = get_user_data(user_name)
             listfriends(user_data)
         elif var == "p":
-            receiver = input("Who would you like to pay?" )
-            amount = input("How much would you like to pay?" )
+            receiver = input("Who would you like to pay? ")
+            amount = input("How much would you like to pay? ")
             payFriend(user_name, receiver, amount)
         elif var == "n":
-            receiver = input("Who's debt are you trying to update?" )
-            amount = input("How much do they owe you?" )
+            receiver = input("Who's debt are you trying to update? ")
+            amount = input("How much do they owe you? ")
             newDebt(user_name, receiver, amount)
 
 
@@ -134,7 +133,7 @@ def listfriends(user_data):
     print("In peace: ")
     for friend in zero:
         print(friend.strip().split()[0] + ": " + friend.strip().split()[1] + "$")
-    
+
     print()
     print()
 
@@ -159,18 +158,21 @@ def payFriend(user_name, friend, amount):
             f.write(buddy)
 
 
-def newDebt(user_name, friend, amount):
+def newDebt(user_name, target_friend, amount):
     with open(user_name + ".txt", "r") as f:
-        friendList = f.readlines()
+        info = f.readlines()[:2]
+        friends = f.readlines()[2:]
+    
+
+    for friend in friends:
+        fr_array = friend.split()
+        if fr_array[0] == target_friend:
+            fr_array[1] += amount
+        friend = fr_array[0] + " " + fr_array[1] + "\n"
+
 
     with open(user_name + ".txt", "w") as f:
-        f.write(friendList[0])
-        f.write(friendList[1])
-        for buddy in friendList[2:]:
-            buddyName = buddy.split()[0]
-            buddyOwe = buddy.split()[1]
-            buddyOwe = int(buddyOwe)
-            if buddyName == friend:
-                buddyOwe += amount
-                buddy = buddyName + " " + str(buddyOwe)
-            f.write(buddy)
+        f.write(info[0])
+        f.write(info[1])
+        for i in range(len(friends)):
+            f.write(friends[i])
