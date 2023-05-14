@@ -36,6 +36,10 @@ if stage == "intro":
     username = ""
     password = ""
 
+elif stage == ""
+
+
+
 
 # Main loop
 while True:
@@ -45,15 +49,17 @@ while True:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            
+            
             # Handle button clicks
-            if login_button.collidepoint(pygame.mouse.get_pos()):
-
-                processes.log_in(username, password)
-                stage = "processes"
-
-            elif signup_button.collidepoint(pygame.mouse.get_pos()):
-                processes.sign_in(username, password)
-                stage = "processes"
+            if stage == "intro":
+                if login_button.collidepoint(pygame.mouse.get_pos()):
+                    processes.log_in(username, password)
+                    stage = "processes"
+                elif signup_button.collidepoint(pygame.mouse.get_pos()):
+                    processes.sign_in(username, password)
+                    stage = "processes"
+            elif stage == "processes":
 
 
         # Handle key events
