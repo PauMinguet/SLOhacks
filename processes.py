@@ -113,9 +113,9 @@ def listfriends(user_data):
 
     friends = user_data[2:]
     for friend in friends:
-        if friend.strip().split()[1] < 0:
+        if int(friend.strip().split()[1]) < 0:
             i_owe.append(friend)
-        elif friend.strip().split()[1] > 0:
+        elif int(friend.strip().split()[1]) > 0:
             they_owe.append(friend)
 
     print()
