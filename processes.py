@@ -25,12 +25,12 @@ def process(user_name):
             user_data = get_user_data(user_name)
             listfriends(user_data)
         elif var == "p":
-            receiver = input("Who would you like to pay?")
-            amount = input("How much would you like to pay?")
+            receiver = input("Who would you like to pay?" )
+            amount = input("How much would you like to pay?" )
             payFriend(user_name, receiver, amount)
         elif var == "n":
-            receiver = input("Who's debt are you trying to update?")
-            amount = input("What would you like to change it to?")
+            receiver = input("Who's debt are you trying to update?" )
+            amount = input("How much do they owe you?" )
             newDebt(user_name, receiver, amount)
 
 
@@ -110,6 +110,7 @@ def get_user_data(user_name):
 def listfriends(user_data):
     i_owe = []
     they_owe = []
+    zero = []
 
     friends = user_data[2:]
     for friend in friends:
@@ -117,17 +118,23 @@ def listfriends(user_data):
             i_owe.append(friend)
         elif int(friend.strip().split()[1]) > 0:
             they_owe.append(friend)
+        else:
+            zero.append(friend)
 
     print()
     print()
     print("You owe: ")
     for friend in i_owe:
         print(friend.strip().split()[0] + ": " + friend.strip().split()[1][1:] + "$")
-        print()
+    print()
     print("They owe you: ")
     for friend in they_owe:
-        print(friend.strip().split()[0] + ": " + friend.strip().split()[1][1:] + "$")
-
+        print(friend.strip().split()[0] + ": " + friend.strip().split()[1] + "$")
+    print()
+    print("In peace: ")
+    for friend in zero:
+        print(friend.strip().split()[0] + ": " + friend.strip().split()[1] + "$")
+    
     print()
     print()
 
@@ -164,6 +171,6 @@ def newDebt(user_name, friend, amount):
             buddyOwe = buddy.split()[1]
             buddyOwe = int(buddyOwe)
             if buddyName == friend:
-                buddyOwe = amount
+                buddyOwe += amount
                 buddy = buddyName + " " + str(buddyOwe)
             f.write(buddy)
