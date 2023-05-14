@@ -7,7 +7,8 @@ def main():
     except:
         with open("users.txt", "x"):
             pass
-
+    print()
+    print()
     print("=====  OWING MONEY APP  =====")
     print()
     var = input("Log in or sign up (l or s)? ")
