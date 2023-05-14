@@ -93,7 +93,6 @@ def addfriend(user_name):
         attempt = input("What is your friend's name : ")
         if not sortNames.find(attempt):
             print("This user does not exist.\nPlease try again")
-            break
         else:
             with open(user_name + ".txt", "a") as f:
                 f.write(attempt + " 0\n")
@@ -102,9 +101,6 @@ def addfriend(user_name):
                 f.write(user_name + " 0\n")
             print("You have added " + attempt + ".")
             break
-
-
-    
 
 
 def get_user_data(user_name):
@@ -121,9 +117,9 @@ def listfriends(user_data):
 
     friends = user_data[2:]
     for friend in friends:
-        if friend.strip().split()[1] < 0:
+        if int(friend.strip().split()[1]) < 0:
             i_owe.append(friend)
-        elif friend.strip().split()[1] > 0:
+        elif int(friend.strip().split()[1]) > 0:
             they_owe.append(friend)
 
     print()
