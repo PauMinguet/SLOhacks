@@ -8,8 +8,8 @@ def process(user_name):
         What do you want to do?
             - Want to add friends? Press 'a'
             - Want to see who you owe money? Press 'l'
-            - Want to pay the debt? Press 'p'
-            - Want to change the amount owed? Press 'n'   NOTE : ADD THIRD AMOUNT TO KEEP TRACK OF MONEY OWED BY OTHERS
+            - Want to pay a debt? Press 'p'
+            - Want to change the amount owed? Press 'n'
             - Exit (e)
         """
         )
@@ -109,9 +109,28 @@ def get_user_data(user_name):
 
 
 def listfriends(user_data):
+
+    i_owe = []
+    they_owe = []
+
     friends = user_data[2:]
     for friend in friends:
-        print(friend.strip().split()[0] + " " + friend.strip().split()[1])
+        if friend.strip().split()[1] < 0:
+            i_owe.append(friend)
+        elif friend.strip().split()[1] > 0:
+            they_owe.append(friend)
+        
+    print()
+    print()
+    print("You owe: ")
+    for friend in i_owe:
+        print(friend.strip().split()[0] + ": " + friend.strip().split()[1][1:] + "$")
+        print()
+    print("They owe you: ")
+    for friend in they_owe:
+        print(friend.strip().split()[0] + ": " + friend.strip().split()[1][1:] + "$")
+
+
 
 
 def payFriend(user_name, friend, amount):
