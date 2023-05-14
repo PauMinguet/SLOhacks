@@ -130,6 +130,9 @@ def listfriends(user_data):
     for friend in they_owe:
         print(friend.strip().split()[0] + ": " + friend.strip().split()[1][1:] + "$")
 
+    print()
+    print()
+
 
 
 
