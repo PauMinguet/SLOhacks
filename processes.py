@@ -13,7 +13,7 @@ def process(user_name):
     - Want to add friends? Press 'a'
     - Want to see who you owe money? Press 'l'
     - Want to pay a debt? Press 'p'
-    - Want to change the amount owed? Press 'n'
+    - Want to create a new debt? Press 'n'
     - Log out (o)
     - Exit (e)          """
         )
@@ -154,12 +154,27 @@ def payFriend(user_name, friend, amount):
             buddyOwe = buddy.split()[1]
             buddyOwe = int(buddyOwe)
             if buddyName == friend:
-                print("yes")
-                if amount <= buddyOwe:
-                    buddyOwe -= amount
-                    print(buddyOwe)
-                buddy = buddyName + " " + str(buddyOwe)
+                buddyOwe += int(amount)
+                buddy = buddyName + " " + str(buddyOwe) + "\n"
             f.write(buddy)
+
+    with open(friend + ".txt", "r") as f:
+        friendList = f.readlines()
+
+    with open(friend + ".txt", "w") as f:
+        f.write(friendList[0])
+        f.write(friendList[1])
+        for buddy in friendList[2:]:
+            buddyName = buddy.split()[0]
+            buddyOwe = buddy.split()[1]
+            buddyOwe = int(buddyOwe)
+            if buddyName == user_name:
+                buddyOwe -= int(amount)
+                buddy = buddyName + " " + str(buddyOwe) + "\n"
+            f.write(buddy)
+
+    
+
 
 
 def newDebt(user_name, friend, amount):
