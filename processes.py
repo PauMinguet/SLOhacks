@@ -55,7 +55,7 @@ def sign_in():
     process(user_name)
 
 
-def log_in(user_name, password):
+def log_in():
     try:
         with open("users.txt", "r"):
             pass
@@ -63,6 +63,7 @@ def log_in(user_name, password):
         with open("users.txt", "x"):
             pass
     while True:
+        user_name = input("Please enter your username : ")
         if not sortNames.find(user_name):
             print("Incorrect username.\nPlease try again")
         else:
@@ -73,6 +74,7 @@ def log_in(user_name, password):
         print(lines)
         savedPassword = lines[1].strip()
 
+    password = input("Password : ")
     while True:
         if password != savedPassword:
             print("Incorrect password.\nPlease try again")
@@ -84,7 +86,7 @@ def log_in(user_name, password):
 
 def addfriend(user_name):
     while True:
-        attempt = input("Search: ")
+        attempt = input("What is your friend's name : ")
         if not sortNames.find(attempt):
             print("This user does not exist.\nPlease try again")
             break
@@ -93,7 +95,7 @@ def addfriend(user_name):
 
     print("You have added " + attempt + ".")
 
-    with open(user_name + ".txt", "a") as f:
+    with open(user_name + ".txt", "w") as f:
         f.write(attempt + " 0\n")
 
     with open(attempt + ".txt", "a") as f:
@@ -109,7 +111,6 @@ def get_user_data(user_name):
 
 
 def listfriends(user_data):
-
     i_owe = []
     they_owe = []
 
@@ -119,7 +120,7 @@ def listfriends(user_data):
             i_owe.append(friend)
         elif friend.strip().split()[1] > 0:
             they_owe.append(friend)
-        
+
     print()
     print()
     print("You owe: ")
@@ -132,11 +133,6 @@ def listfriends(user_data):
 
     print()
     print()
-
-    i_owe = []
-    they_owe = []
-
-
 
 
 def payFriend(user_name, friend, amount):
