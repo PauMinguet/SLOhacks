@@ -3,16 +3,16 @@ import main
 
 
 def process(user_name):
+    print("\nWelcome," + user_name)
     while True:
         var = input(
-            """
-        What do you want to do?
-            - Want to add friends? Press 'a'
-            - Want to see who you owe money? Press 'l'
-            - Want to pay a debt? Press 'p'
-            - Want to change the amount owed? Press 'n'
-            - Log out (o)
-            - Exit (e)
+            """What do you want to do?
+    - Want to add friends? Press 'a'
+    - Want to see who you owe money? Press 'l'
+    - Want to pay a debt? Press 'p'
+    - Want to change the amount owed? Press 'n'
+    - Log out (o)
+    - Exit (e)
         """
         )
         if var == "e":
@@ -75,7 +75,6 @@ def log_in():
 
     with open(user_name + ".txt", "r") as f:
         lines = f.readlines()
-        print(lines)
         savedPassword = lines[1].strip()
 
     password = input("Password : ")
@@ -84,7 +83,6 @@ def log_in():
             print("Incorrect password.\nPlease try again")
         else:
             break
-
     process(user_name)
 
 
@@ -106,8 +104,6 @@ def addfriend(user_name):
 def get_user_data(user_name):
     with open(user_name + ".txt", "r") as f:
         lines = f.readlines()
-        print()
-        print("Welcome, " + lines[0].strip())
     return lines
 
 
